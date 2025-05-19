@@ -1,75 +1,124 @@
-# Educational Chat Assistant
-This application enables students to chat with educational content from PDF documents.
+# Gyantra: NCERT Solutions
+
+A Streamlit-based educational application that provides interactive chatbot solutions for NCERT (National Council of Educational Research and Training) learning materials.
+
+## Overview
+
+Gyantra NCERT Solutions is an AI-powered educational tool that helps students access context-aware answers to their questions about NCERT textbooks. The application uses RAG (Retrieval-Augmented Generation) to provide accurate responses based on the content of uploaded textbooks.
 
 ## Features
-- Create vector embeddings from PDF documents by standard, subject, and chapter
-- Chat with specific chapters using AI-powered conversations
-- Organize and manage your educational content
-- Delete vectors when no longer needed
 
-## Installation
+- **Chapter-based Conversations**: Chat with AI about specific chapters from NCERT textbooks
+- **PDF Processing**: Upload PDF files of NCERT chapters for vectorization
+- **Vector Management**: Create, view, and delete chapter vectors
+- **Contextual Chat**: Get answers based on the selected chapter's content
+- **Conversation History**: View and continue conversations within each session
+
+## Tech Stack
+
+- **Frontend**: Streamlit
+- **Vector Database**: FAISS for efficient similarity search
+- **Embedding Model**: Google's Gemini Embedding model
+- **LLM**: Google's Gemini 2.5 Flash model 
+- **Document Processing**: LangChain for PDF handling and text splitting
+
+## Setup Instructions
 
 ### Prerequisites
+
 - Python 3.8+
-- pip (Python package installer)
+- Google API key with access to Gemini models
 
-### Setup Instructions
-1. Clone this repository or download the source files
-2. Create a virtual environment (recommended):
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install required packages:
-   ```
-   pip install streamlit langchain langchain-google-genai langchain-community faiss-cpu
-   ```
-4. Set up your Google API key:
-   ```
-   export GOOGLE_API_KEY=your_api_key_here
-   ```
-   On Windows:
-   ```
-   set GOOGLE_API_KEY=your_api_key_here
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/azharbihari/gyantra.git
+   cd gyantra
    ```
 
-## Usage
-1. Run the setup script to create necessary directories:
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
    ```
-   python setup.py
+
+3. Set up your Google API key:
+   ```bash
+   export GOOGLE_API_KEY="your_api_key_here"
    ```
-2. Start the application:
-   ```
-   streamlit run app.py
-   ```
-3. Open your browser and navigate to `http://localhost:8501`
 
-## Application Structure
-- **app.py**: Main Streamlit application with UI
-- **vector_manager.py**: Handles PDF processing and vector operations
-- **chat_engine.py**: Manages the chat functionality with LangChain
-- **setup.py**: Initial setup script
+### Directory Structure
 
-## How to Use
-1. **Create Vectors**: 
-   - Go to the "Create Vectors" tab
-   - Enter the standard, subject, and chapter
-   - Upload a PDF file
-   - Click "Process PDF"
+```
+gyantra/
+├── app.py                 # Main Streamlit application
+├── services/
+│   ├── chat_service.py    # Handles RAG and conversation
+│   └── vector_service.py  # Manages vector creation and deletion
+├── vectors/               # Storage for vector databases
+└── requirements.txt       # Project dependencies
+```
 
-2. **Chat with Content**:
-   - Go to the "Chat" tab
-   - Select the standard, subject, and chapter from the sidebar
-   - Click "Chat with this chapter"
-   - Ask questions about the content
+## Usage Guide
 
-3. **Manage Vectors**:
-   - Go to the "Manage Vectors" tab
-   - Select vectors to delete
-   - Click "Delete Selected Chapters"
+### Running the Application
 
-## Technologies Used
-- Streamlit: UI framework
-- LangChain: Framework for LLM applications
-- Google Generative AI (Gemini): LLM model
-- FAISS: Vector database for storing embeddings
+```bash
+streamlit run app.py
+```
+
+The application will be accessible at `http://localhost:8501` by default.
+
+### Creating Chapter Vectors
+
+1. Navigate to the "Manage Vectors" tab
+2. Fill in the form with the standard (grade), subject, and chapter name
+3. Upload the chapter's PDF file
+4. Click "Process PDF" to create the vector database
+
+### Chatting with Chapters
+
+1. Go to the "Chat" tab
+2. Select a chapter from the dropdown menu
+3. Type your question in the chat input
+4. Receive contextually relevant answers based on the chapter content
+
+## Dependencies
+
+The following main packages are required:
+- streamlit
+- langchain
+- langchain-google-genai
+- faiss-cpu
+- pypdf
+
+See requirements.txt for complete dependencies.
+
+## Limitations
+
+- Requires Google API key with access to Gemini models
+- Currently supports only PDF files
+- Vector databases can consume significant disk space for large textbooks
+
+## Future Enhancements
+
+- Support for DOCX and other file formats
+- Multi-language support for regional language textbooks
+- User authentication and persistence of chat history
+- Advanced search and filtering options
+- Exportable summaries and study notes
+
+## License
+
+[MIT License](LICENSE)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Acknowledgements
+
+- NCERT for educational materials
+- Google Gemini for AI capabilities
+- Streamlit for the interactive web interface
+- LangChain for RAG framework
